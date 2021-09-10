@@ -190,12 +190,7 @@ class GenericConversionServiceTests {
 
 	@Test
 	void convertSuperSourceType() {
-		conversionService.addConverter(new Converter<CharSequence, Integer>() {
-			@Override
-			public Integer convert(CharSequence source) {
-				return Integer.valueOf(source.toString());
-			}
-		});
+		conversionService.addConverter((Converter<CharSequence, Integer>)source -> Integer.valueOf(source.toString()));
 		Integer result = conversionService.convert("3", Integer.class);
 		assertThat((int) result).isEqualTo((int) Integer.valueOf(3));
 	}

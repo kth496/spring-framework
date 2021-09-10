@@ -134,12 +134,7 @@ class StreamConverterTests {
 	@SuppressWarnings("resource")
 	void convertFromArrayToStream() throws NoSuchFieldException {
 		Integer[] stream = new Integer[] {1, 0, 1};
-		this.conversionService.addConverter(new Converter<Integer, Boolean>() {
-			@Override
-			public Boolean convert(Integer source) {
-				return source == 1;
-			}
-		});
+		this.conversionService.addConverter((Converter<Integer, Boolean>)source -> source == 1);
 		TypeDescriptor streamOfBoolean = new TypeDescriptor(Types.class.getField("streamOfBooleans"));
 		Object result = this.conversionService.convert(stream, streamOfBoolean);
 

@@ -61,12 +61,7 @@ class SimpleAsyncTaskExecutorTests {
 	@Test
 	void threadFactoryOverridesDefaults() throws Exception {
 		final Object monitor = new Object();
-		SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor(new ThreadFactory() {
-			@Override
-			public Thread newThread(Runnable r) {
-				return new Thread(r, "test");
-			}
-		});
+		SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor(runnable -> new Thread(runnable, "test"));
 		ThreadNameHarvester task = new ThreadNameHarvester(monitor);
 		executeAndWait(executor, task, monitor);
 		assertThat(task.getThreadName()).isEqualTo("test");
