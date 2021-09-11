@@ -16,7 +16,6 @@
 
 package org.springframework.core.task;
 
-import java.util.concurrent.ThreadFactory;
 
 import org.junit.jupiter.api.Test;
 
